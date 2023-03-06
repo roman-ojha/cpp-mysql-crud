@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Database.cpp";
+#include "App.cpp"
 
 /*
 	*) Steps:
@@ -12,7 +12,7 @@
 
 int main()
 {
-	Database *db = new Database("tcp://127.0.0.1:3306", "root", "", "cpp_curd");
-	db->query("SELECT * FROM User;");
-	// db->migrate();
+	App app("cpp_curd");
+	app.run();
+	return 0;
 }
