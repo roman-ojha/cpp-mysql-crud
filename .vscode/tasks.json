@@ -14,8 +14,7 @@
         "include",
         "-L",
         "lib\\vs14",
-        "-l",
-        "mysqlcppconn"
+        "-lmysqlcppconn8-static"
       ],
       "options": {
         "cwd": "${fileDirname}"
