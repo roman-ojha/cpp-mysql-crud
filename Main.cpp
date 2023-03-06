@@ -12,6 +12,7 @@
 
 int main()
 {
-	Database db("tcp://127.0.0.1:3306", "root", "", "cpp_curd");
-	//db.query();
+	Database *db = new Database("tcp://127.0.0.1:3306", "root", "", "cpp_curd");
+	db->query("SELECT * FROM User;");
+	// db->migrate();
 }
