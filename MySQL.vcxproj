@@ -24,7 +24,7 @@
     <ProjectGuid>{42e12cb1-05aa-4772-a55f-5a09e8a131b4}</ProjectGuid>
     <RootNamespace>MySQL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>MySQL-CURD</ProjectName>
+    <ProjectName>MySQL-CRUD</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

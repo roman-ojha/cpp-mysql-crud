@@ -35,16 +35,17 @@ public:
 				// Database doesn't exist so need to create database
 				this->query("CREATE DATABASE " + std::string(this->databasename));
 			}
-			std::cout << "# ERR: " << e.what();
-			std::cout << " (MySQL error code: " << e.getErrorCode();
-			std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
+			//std::cout << "# ERR: " << e.what();
+			//std::cout << " (MySQL error code: " << e.getErrorCode();
+			//std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 		}
 	}
-	void query(std::string _query_str) {
+	sql::ResultSet *query(std::string _query_str) {
 		try {
 			sql::Statement* stmt = this->conn->createStatement();
 			sql::ResultSet* res = stmt->executeQuery(_query_str);
-			std::cout << res->first() << std::endl;
+			delete stmt;
+			return res;
 		}
 		catch (sql::SQLException& e) {
 			std::cout << "# ERR: " << e.what();
@@ -66,9 +67,9 @@ public:
 			std::cout << res->first() << std::endl;
 		}
 		catch (sql::SQLException& e) {
-			std::cout << "# ERR: " << e.what();
-			std::cout << " (MySQL error code: " << e.getErrorCode();
-			std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
+			//std::cout << "# ERR: " << e.what();
+			//std::cout << " (MySQL error code: " << e.getErrorCode();
+			//std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 		}
 	}
 
