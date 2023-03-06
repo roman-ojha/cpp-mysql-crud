@@ -16,7 +16,7 @@ private:
 	sql::Connection* conn;
 
 public:
-	Database(std::string _hostname, std::string _user, std::string _password,std::string _dbname) {
+	Database(std::string _hostname, std::string _user, std::string _password, std::string _dbname) {
 		this->hostname = _hostname;
 		this->user = _user;
 		this->password = _password;
@@ -26,7 +26,7 @@ public:
 			// std::cout << "Connecting to mysql server...";
 			driver = get_driver_instance();
 			this->conn = driver->connect(this->hostname, this->user, this->password);
-			std::cout << "Database Connected" << std::endl;
+			// std::cout << "Database Connected" << std::endl;
 			this->conn->setSchema(this->databasename);
 		}
 		catch (sql::SQLException& e)
@@ -43,10 +43,10 @@ public:
 	void query(std::string _query_str) {
 		try {
 			sql::Statement* stmt = this->conn->createStatement();
-			sql::ResultSet *res = stmt->executeQuery(_query_str);
+			sql::ResultSet* res = stmt->executeQuery(_query_str);
 			std::cout << res->first() << std::endl;
 		}
-		catch (sql::SQLException &e) {
+		catch (sql::SQLException& e) {
 			std::cout << "# ERR: " << e.what();
 			std::cout << " (MySQL error code: " << e.getErrorCode();
 			std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
@@ -73,6 +73,7 @@ public:
 	}
 
 	~Database() {
+		std::cout << "Database closed" << std::endl;
 		delete conn;
 	}
 };
