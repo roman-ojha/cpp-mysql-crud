@@ -12,7 +12,7 @@ public:
 	std::string email;
 	std::string address;
 	std::string table_name = "user";
-	User() : id(NULL), name(NULL), email(NULL), address(NULL), password(NULL) {}
+	User() {}
 	User(std::string _name, std::string _email, std::string _address, std::string _pass)
 	{
 		this->id = NULL;

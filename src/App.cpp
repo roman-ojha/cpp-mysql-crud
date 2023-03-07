@@ -9,7 +9,8 @@ class App
 public:
 	static Database *db;
 	std::string name;
-	App(std::string name) : name(name){};
+	User authenticatedUser;
+	App(std::string name) : name(name){}
 	~App() {
 		delete db;
 	}
@@ -19,15 +20,18 @@ public:
 	}
 
 private:
-	User *authenticateUser(std::string email)
+	bool authenticateUser()
 	{
 		try
 		{
+			std::string email;
+			std::ifstream in("token.txt");
+			in >> email;
 			sql::ResultSet *res = App::db->query("SELECT * FROM user WHERE email='" + email + "'");
 			if (!res->next())
 			{
 				std::cout << "Unauthorized Please login first" << std::endl;
-				return nullptr;
+				return false;
 			}
 			if (email == res->getString("email"))
 			{
@@ -37,8 +41,9 @@ private:
 				std::string email = res->getString("email");
 				std::string address = res->getString("address");
 				std::string password = res->getString("password");
-				User *user = new User(id, name, email, address, password);
-				return user;
+				User user(id, name, email, address, password);
+				this->authenticatedUser = user;
+				return true;
 			}
 		}
 		catch (sql::SQLException &e)
@@ -47,7 +52,7 @@ private:
 			std::cout << " (MySQL error code: " << e.getErrorCode();
 			std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 		}
-		return nullptr;
+		return false;
 	}
 	void createNewUer()
 	{
@@ -63,13 +68,10 @@ private:
 	}
 	void home()
 	{
-		std::string email;
-		std::ifstream in("token.txt");
-		in >> email;
-		User *user = this->authenticateUser(email);
-		if (user)
+		bool res = this->authenticateUser();
+		if (res)
 		{
-			std::cout << "==================== Hello, " + std::string(user->name) + " Welcome ====================" << std::endl;
+			std::cout << "==================== Hello, " + std::string(this->authenticatedUser.name) + " Welcome ====================" << std::endl;
 			int choice = 0;
 			while (true)
 			{
@@ -163,7 +165,7 @@ void User::migrate() {
 		sql::ResultSet* res = App::db->query(create_user);
 		delete res;
 	}
-	catch (sql::SQLException& e)
+	catch (...)
 	{
 		// std::cout << "# ERR: " << e.what();
 		// std::cout << " (MySQL error code: " << e.getErrorCode();
