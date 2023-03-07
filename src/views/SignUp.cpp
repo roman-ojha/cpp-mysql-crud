@@ -1,4 +1,10 @@
 #include<iostream>
+#include<fstream>
+
+#ifndef USER
+#include "../src/models/User.cpp"
+#define USER
+#endif
 
 class SignUp {
 public:

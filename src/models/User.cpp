@@ -1,5 +1,7 @@
 #include <iostream>
 
+#ifndef USER
+#define USER
 class User
 {
 
@@ -34,3 +36,5 @@ public:
 	void migrate();
 	bool save();
 };
+
+#endif

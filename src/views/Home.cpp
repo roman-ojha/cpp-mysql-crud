@@ -1,16 +1,22 @@
 #include<iostream>
 #include "Profile.cpp"
-#include "User.cpp"
+#include "UserView.cpp"
 //#include "SignUp.cpp"
 
-class Home:public Profile ,public UserView{
+#ifndef USER
+#include "../src/models/User.cpp";
+#define USER
+#endif
+
+class Home:private Profile ,private UserView{
 public:
-	void home()
+	void home(User *authenticatedUser)
 	{
-		bool res = this->authenticateUser();
-		if (res)
+
+		//if (res)
+		if(true)
 		{
-			std::cout << "==================== Hello, " + std::string(this->authenticatedUser.name) + " Welcome ====================" << std::endl;
+			//std::cout << "==================== Hello, " + std::string(this->authenticatedUser.name) + " Welcome ====================" << std::endl;
 			int choice = 0;
 			while (true)
 			{
@@ -50,3 +56,4 @@ public:
 		}
 	}
 };
+

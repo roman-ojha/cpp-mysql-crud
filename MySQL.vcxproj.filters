@@ -21,6 +21,18 @@
     <ClCompile Include="src\models\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\views\Home.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\Profile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\UserView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\views\SignUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\config\Database.cpp">

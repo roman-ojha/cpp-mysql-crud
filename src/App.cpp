@@ -5,7 +5,7 @@
 #include "config/Database.cpp"
 #include "views/Home.cpp"
 
-class App: private Home
+class App
 {
 public:
 	static Database *db;
@@ -17,7 +17,9 @@ public:
 	}
 	void run()
 	{
-		this->home();
+		bool res = this->authenticateUser();
+		Home h;
+		//h.home();
 	}
 
 private:
@@ -55,26 +57,13 @@ private:
 		}
 		return false;
 	}
-
-	void createNewUer()
-	{
-	}
-	void viewProfile()
-	{
-	}
-	void listOfUsers()
-	{
-	}
-	void updateProfile()
-	{
-	}
 };
 
 bool User::save()
 {
-	sql::ResultSet *res = App::db->query("INSERT INTO " + this->table_name + " (name, email, address, password)"
-																			 " VALUES('" +
-										 this->name + "', '" + this->email + "', '" + this->address + "', '" + this->password + "');");
+	sql::ResultSet* res = App::db->query("INSERT INTO " + this->table_name + " (name, email, address, password)"
+		" VALUES('" +
+		this->name + "', '" + this->email + "', '" + this->address + "', '" + this->password + "');");
 	if (res)
 	{
 		delete res;

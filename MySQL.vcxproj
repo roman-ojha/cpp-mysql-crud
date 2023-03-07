@@ -137,6 +137,10 @@
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\models\User.cpp" />
+    <ClCompile Include="src\views\Home.cpp" />
+    <ClCompile Include="src\views\Profile.cpp" />
+    <ClCompile Include="src\views\SignUp.cpp" />
+    <ClCompile Include="src\views\UserView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.cpp" />
