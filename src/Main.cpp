@@ -1,5 +1,5 @@
 #include <iostream>
-#include "App.h"
+#include "App.cpp"
 
 constexpr auto DB_HOST = "tcp://127.0.0.1:3306";
 constexpr auto DB_USER = "root";

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "User.h"
-#include "Database.h"
+#include "models/User.cpp"
+#include "config/Database.cpp"
 
 class App
 {
