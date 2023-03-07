@@ -10,9 +10,11 @@ public:
 	static Database *db;
 	std::string name;
 	App(std::string name) : name(name){};
+	~App() {
+		delete db;
+	}
 	void run()
 	{
-		// App::db->migrate();
 		this->home();
 	}
 
@@ -147,4 +149,24 @@ bool User::save()
 	}
 	else
 		return false;
+}
+
+void User::migrate() {
+	std::string create_user = "CREATE TABLE User("
+		"id INT(10) AUTO_INCREMENT PRIMARY KEY,"
+		"name VARCHAR(50) NOT NULL,"
+		"email VARCHAR(50) NOT NULL,"
+		"address VARCHAR(50) NOT NULL,"
+		"password VARCHAR(50) NOT NULL)";
+	try
+	{
+		sql::ResultSet* res = App::db->query(create_user);
+		delete res;
+	}
+	catch (sql::SQLException& e)
+	{
+		// std::cout << "# ERR: " << e.what();
+		// std::cout << " (MySQL error code: " << e.getErrorCode();
+		// std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
+	}
 }

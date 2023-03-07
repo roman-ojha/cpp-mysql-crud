@@ -30,6 +30,7 @@ public:
 		this->password = _pass;
 	}
 
-	// Defined inside 'App.h'
+	// Defines inside 'App.h'
+	void migrate();
 	bool save();
 };
