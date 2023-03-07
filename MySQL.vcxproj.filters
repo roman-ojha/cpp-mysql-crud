@@ -30,7 +30,7 @@
     <ClCompile Include="src\views\UserView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\views\SignUp.cpp">
+    <ClCompile Include="src\views\AuthView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\AuthenticatedUser.cpp">

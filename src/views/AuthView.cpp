@@ -6,7 +6,7 @@
 #define USER
 #endif
 
-class SignUp {
+class AuthView {
 public:
 	User* signUp()
 	{
@@ -24,17 +24,20 @@ public:
 		std::cin >> address;
 		std::cout << "Password: ";
 		std::cin >> password;
-		User user(name, email, address, password);
-		if (user.save())
+		User* user = new User(name, email, address, password);
+		if (user->save())
 		{
 			std::cout << "User register successfully" << std::endl;
 			std::ofstream out("token.txt");
 			out << email;
-			return &user;
+			return user;
 		}
 		else
 			std::cout << "Error while registering user" << std::endl;
 
 		return nullptr;
+	}
+	void signIn() {
+		std::cout << "Signin " << std::endl;
 	}
 };

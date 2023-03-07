@@ -140,7 +140,7 @@
     <ClCompile Include="src\utils\AuthenticatedUser.cpp" />
     <ClCompile Include="src\views\Home.cpp" />
     <ClCompile Include="src\views\Profile.cpp" />
-    <ClCompile Include="src\views\SignUp.cpp" />
+    <ClCompile Include="src\views\AuthView.cpp" />
     <ClCompile Include="src\views\UserView.cpp" />
   </ItemGroup>
   <ItemGroup>

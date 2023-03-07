@@ -24,15 +24,10 @@ public:
 		this->databasename = _dbname;
 		try
 		{
-
-			// std::cout << "Connecting to mysql server...";
 			driver = get_driver_instance();
 			this->conn = driver->connect(this->hostname, this->user, this->password);
-			 std::cout << "Database Connected" << std::endl;
+			 //std::cout << "Database Connected" << std::endl;
 			this->conn->setSchema(this->databasename);
-			//sql::Statement *stmt = this->conn->createStatement();
-			//sql::ResultSet *res = stmt->executeQuery("INSERT INTO users (name,email,address,password) VALUES ('roman', 'abc', '123', 'jack');");
-			//sql::ResultSet *res = stmt->executeQuery("");
 		}
 		catch (sql::SQLException &e)
 		{

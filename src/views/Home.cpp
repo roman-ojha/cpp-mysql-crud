@@ -1,7 +1,7 @@
 #include<iostream>
 #include "Profile.cpp"
 #include "UserView.cpp"
-#include "SignUp.cpp"
+#include "AuthView.cpp"
 
 #ifndef USER
 #include "../src/models/User.cpp";
@@ -13,7 +13,7 @@
 #define AUTHENTICATEDUSER
 #endif
 
-class Home:private Profile ,private UserView,private SignUp{
+class Home:private Profile ,private UserView,private AuthView{
 public:
 	void home(AuthenticatedUser *authUser)
 	{
@@ -55,12 +55,29 @@ public:
 		}
 		else
 		{
-			User *user = this->signUp();
-			if (user) {
-				AuthenticatedUser* authUser = new AuthenticatedUser(user);
-				this->home(authUser);
+			int choice = 0;
+			while (true) {
+				std::cout << "SignIn (1):" << std::endl;
+				std::cout << "SignUp (2):" << std::endl;
+				std::cout << "Close Program (3):" << std::endl;
+				std::cout << "Chose between 1-3: ";
+				std::cin >> choice;
+				if (choice == 1) {
+					this->signIn();
+				}
+				else if (choice == 2) {
+					User *user = this->signUp();
+					if (user) {
+						AuthenticatedUser* authUser = new AuthenticatedUser(user);
+						this->home(authUser);
+					}
+					else exit(1);
+				}
+				else if (choice == 3) {
+						exit(1);
+				}
+				else std::cout << "Invalid Number, please pick it again" << std::endl;
 			}
-			else exit(1);
 		}
 	}
 };

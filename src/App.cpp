@@ -40,7 +40,7 @@ private:
 			sql::ResultSet *res = App::db->query("SELECT * FROM users WHERE email='" + email + "'");
 			if (res->rowsCount()==0)
 			{
-				std::cout << "Unauthorized Please login first" << std::endl;
+				std::cout << "Unauthorized Please login first ========" << std::endl;
 				AuthenticatedUser* authUser = new AuthenticatedUser;
 				return authUser;
 			}
