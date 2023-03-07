@@ -16,17 +16,13 @@ public:
 	}
 
 private:
-	User *authenticateUser(std::string email) {
-		User* user = new User();
+	User* authenticateUser(std::string email) {
 		try {
-
-			std::cout << email << std::endl;
 			sql::ResultSet* res = App::db->query("SELECT * FROM user WHERE email='" + email + "'");
 			if (!res->next()) {
 				std::cout << "Unauthorized Please login first" << std::endl;
-				return user;
+				return nullptr;
 			}
-			std::cout << res->getString("name") << std::endl;
 			if (email == res->getString("email")) {
 				// Authorized
 				int id = res->getInt(1);
@@ -34,7 +30,7 @@ private:
 				std::string email = res->getString("email");
 				std::string address = res->getString("address");
 				std::string password = res->getString("password");
-				// user = new User(id,name,email,address,password);
+				User *user = new User(id,name,email,address,password);
 				return user;
 			}
 		}
@@ -43,15 +39,62 @@ private:
 			std::cout << " (MySQL error code: " << e.getErrorCode();
 			std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 		}
-		return user;
+		return nullptr;
+	}
+	void createNewUer() {
+
+	}
+	void viewProfile() {
+
+	}
+	void listOfUsers() {
+
+	}
+	void updateProfile() {
+
 	}
 	void home() {
 		std::string email;
 		std::ifstream in("token.txt");
 		in >> email;
-		this->authenticateUser(email);
+		User *user = this->authenticateUser(email);
+		if (user) {
+			std::cout << "==================== Hello, " + std::string(user->name)+" Welcome ===================="<<std::endl;
+			int choice = 0;
+			while (true) {
+				std::cout << "Create new user (1): " << std::endl;
+				std::cout << "View Profile (2): " << std::endl;
+				std::cout << "List of Users & it's Operations (3): " << std::endl;
+				std::cout << "Update your Profile (4)" << std::endl;
+				std::cout << "Close program (5)" << std::endl;
+				std::cout << "Choose between 1-5: ";
+				std::cin >> choice;
+				switch (choice) {
+					case 1:
+						this->createNewUer();
+						break;
+					case 2:
+						this->viewProfile();
+						break;
+					case 3:
+						this->listOfUsers();
+						break;
+					case 4:
+						this->updateProfile();
+						break;
+					case 5:
+						exit(1);
+						break;
+					default:
+						std::cout << "Invalid Number, please pick it again:" << std::endl;
+						break;
+				}
+			}
+		}
+		else {
+			this->signUp();
+		}
 
-		// this->signUp();
 	}
 
 	void signUp() {
