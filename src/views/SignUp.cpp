@@ -8,7 +8,7 @@
 
 class SignUp {
 public:
-	void signUp()
+	User* signUp()
 	{
 		std::string password;
 		std::string name;
@@ -30,8 +30,11 @@ public:
 			std::cout << "User register successfully" << std::endl;
 			std::ofstream out("token.txt");
 			out << email;
+			return &user;
 		}
 		else
 			std::cout << "Error while registering user" << std::endl;
+
+		return nullptr;
 	}
 };

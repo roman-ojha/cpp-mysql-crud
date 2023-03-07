@@ -28,8 +28,11 @@ public:
 			// std::cout << "Connecting to mysql server...";
 			driver = get_driver_instance();
 			this->conn = driver->connect(this->hostname, this->user, this->password);
-			// std::cout << "Database Connected" << std::endl;
+			 std::cout << "Database Connected" << std::endl;
 			this->conn->setSchema(this->databasename);
+			//sql::Statement *stmt = this->conn->createStatement();
+			//sql::ResultSet *res = stmt->executeQuery("INSERT INTO users (name,email,address,password) VALUES ('roman', 'abc', '123', 'jack');");
+			//sql::ResultSet *res = stmt->executeQuery("");
 		}
 		catch (sql::SQLException &e)
 		{
@@ -38,9 +41,9 @@ public:
 				// Database doesn't exist so need to create database
 				this->query("CREATE DATABASE " + std::string(this->databasename));
 			}
-			// std::cout << "# ERR: " << e.what();
-			// std::cout << " (MySQL error code: " << e.getErrorCode();
-			// std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
+			 std::cout << "# ERR: " << e.what();
+			 std::cout << " (MySQL error code: " << e.getErrorCode();
+			 std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 		}
 	}
 	sql::ResultSet *query(std::string _query_str)
@@ -51,13 +54,14 @@ public:
 		{
 			stmt = this->conn->createStatement();
 			res = stmt->executeQuery(_query_str);
-			delete stmt;
+		 	delete stmt;
 		}
 		catch (sql::SQLException &e)
 		{
-			std::cout << "# ERR: " << e.what();
-			std::cout << " (MySQL error code: " << e.getErrorCode();
-			std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
+			//std::cout << "# ERR From: Database::query()" << std::endl;
+			//std::cout << "# ERR: " << e.what();
+			//std::cout << " (MySQL error code: " << e.getErrorCode();
+			//std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 		}
 		return res;
 	}

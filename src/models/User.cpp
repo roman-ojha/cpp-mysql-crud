@@ -13,8 +13,12 @@ public:
 	std::string name;
 	std::string email;
 	std::string address;
-	std::string table_name = "user";
-	User() {}
+	std::string table_name = "users";
+	User() {
+		this->name = "";
+		this->email = "";
+		this->address = "";
+	}
 	User(std::string _name, std::string _email, std::string _address, std::string _pass)
 	{
 		this->id = NULL;

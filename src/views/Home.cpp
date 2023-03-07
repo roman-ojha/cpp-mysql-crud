@@ -1,22 +1,25 @@
 #include<iostream>
 #include "Profile.cpp"
 #include "UserView.cpp"
-//#include "SignUp.cpp"
+#include "SignUp.cpp"
 
 #ifndef USER
 #include "../src/models/User.cpp";
 #define USER
 #endif
 
-class Home:private Profile ,private UserView{
-public:
-	void home(User *authenticatedUser)
-	{
+#ifndef AUTHENTICATEDUSER
+#include "../src/utils/AuthenticatedUser.cpp";
+#define AUTHENTICATEDUSER
+#endif
 
-		//if (res)
-		if(true)
+class Home:private Profile ,private UserView,private SignUp{
+public:
+	void home(AuthenticatedUser *authUser)
+	{
+		if(authUser->isAuthenticated)
 		{
-			//std::cout << "==================== Hello, " + std::string(this->authenticatedUser.name) + " Welcome ====================" << std::endl;
+			std::cout << "==================== Hello, " + std::string(authUser->user->name) + " Welcome ====================" << std::endl;
 			int choice = 0;
 			while (true)
 			{
@@ -52,8 +55,12 @@ public:
 		}
 		else
 		{
-			//this->signUp();
+			User *user = this->signUp();
+			if (user) {
+				AuthenticatedUser* authUser = new AuthenticatedUser(user);
+				this->home(authUser);
+			}
+			else exit(1);
 		}
 	}
 };
-
