@@ -1,23 +1,27 @@
-#include<iostream>
+#include <iostream>
 
 #ifndef USER
 #include "../src/models/User.cpp"
 #define USER
 #endif
 
-class AuthenticatedUser {
+class AuthenticatedUser
+{
 public:
 	User *user;
 	bool isAuthenticated;
-	AuthenticatedUser() {
+	AuthenticatedUser()
+	{
 		this->user = nullptr;
 		this->isAuthenticated = false;
 	}
-	AuthenticatedUser(User* _user) {
+	AuthenticatedUser(User *_user)
+	{
 		this->user = _user;
 		this->isAuthenticated = true;
 	}
-	~AuthenticatedUser() {
+	~AuthenticatedUser()
+	{
 		delete user;
 	}
 };

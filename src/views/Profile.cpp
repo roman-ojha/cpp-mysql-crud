@@ -1,12 +1,13 @@
-#include<iostream>
+#include <iostream>
 
-class Profile {
+class Profile
+{
 public:
-	void viewProfile() {
-
+	void viewProfile()
+	{
 	}
 
-	void updateProfile() {
-
+	void updateProfile()
+	{
 	}
 };

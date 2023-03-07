@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include "Profile.cpp"
 #include "UserView.cpp"
 #include "AuthView.cpp"
@@ -13,11 +13,12 @@
 #define AUTHENTICATEDUSER
 #endif
 
-class Home:private Profile ,private UserView,private AuthView{
+class Home : private Profile, private UserView, private AuthView
+{
 public:
 	void home(AuthenticatedUser *authUser)
 	{
-		if(authUser->isAuthenticated)
+		if (authUser->isAuthenticated)
 		{
 			std::cout << "==================== Hello, " + std::string(authUser->user->name) + " Welcome ====================" << std::endl;
 			int choice = 0;
@@ -56,27 +57,34 @@ public:
 		else
 		{
 			int choice = 0;
-			while (true) {
+			while (true)
+			{
 				std::cout << "SignIn (1):" << std::endl;
 				std::cout << "SignUp (2):" << std::endl;
 				std::cout << "Close Program (3):" << std::endl;
 				std::cout << "Chose between 1-3: ";
 				std::cin >> choice;
-				if (choice == 1) {
+				if (choice == 1)
+				{
 					this->signIn();
 				}
-				else if (choice == 2) {
+				else if (choice == 2)
+				{
 					User *user = this->signUp();
-					if (user) {
-						AuthenticatedUser* authUser = new AuthenticatedUser(user);
+					if (user)
+					{
+						AuthenticatedUser *authUser = new AuthenticatedUser(user);
 						this->home(authUser);
 					}
-					else exit(1);
-				}
-				else if (choice == 3) {
+					else
 						exit(1);
 				}
-				else std::cout << "Invalid Number, please pick it again" << std::endl;
+				else if (choice == 3)
+				{
+					exit(1);
+				}
+				else
+					std::cout << "Invalid Number, please pick it again" << std::endl;
 			}
 		}
 	}

@@ -14,7 +14,8 @@ public:
 	std::string email;
 	std::string address;
 	std::string table_name = "users";
-	User() {
+	User()
+	{
 		this->name = "";
 		this->email = "";
 		this->address = "";

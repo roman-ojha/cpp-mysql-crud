@@ -16,21 +16,22 @@ public:
 	static Database *db;
 	std::string name;
 	User authenticatedUser;
-	App(std::string name) : name(name){}
-	~App() {
+	App(std::string name) : name(name) {}
+	~App()
+	{
 		delete db;
 	}
 	void run()
 	{
-		//User u;
-		//u.migrate();
+		// User u;
+		// u.migrate();
 		AuthenticatedUser *authUser = this->authenticateUser();
 		Home h;
 		h.home(authUser);
 	}
 
 private:
-	AuthenticatedUser* authenticateUser()
+	AuthenticatedUser *authenticateUser()
 	{
 		try
 		{
@@ -38,10 +39,10 @@ private:
 			std::ifstream in("token.txt");
 			in >> email;
 			sql::ResultSet *res = App::db->query("SELECT * FROM users WHERE email='" + email + "'");
-			if (res->rowsCount()==0)
+			if (res->rowsCount() == 0)
 			{
 				std::cout << "Unauthorized Please login first ========" << std::endl;
-				AuthenticatedUser* authUser = new AuthenticatedUser;
+				AuthenticatedUser *authUser = new AuthenticatedUser;
 				return authUser;
 			}
 			res->next();
@@ -54,52 +55,67 @@ private:
 				std::string address = res->getString("address");
 				std::string password = res->getString("password");
 				User *user = new User(id, name, email, address, password);
-				AuthenticatedUser* authUser = new AuthenticatedUser(user);
-				//this->authenticatedUser = user;
+				AuthenticatedUser *authUser = new AuthenticatedUser(user);
+				// this->authenticatedUser = user;
 				return authUser;
 			}
 		}
 		catch (sql::SQLException &e)
 		{
-			//std::cout << "# ERR: " << e.what();
-			//std::cout << " (MySQL error code: " << e.getErrorCode();
-			//std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
+			// std::cout << "# ERR: " << e.what();
+			// std::cout << " (MySQL error code: " << e.getErrorCode();
+			// std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
 		}
 
-		AuthenticatedUser* authUser = new AuthenticatedUser;
+		AuthenticatedUser *authUser = new AuthenticatedUser;
 		return authUser;
 	}
 };
 
 bool User::save()
 {
-	try {
+	try
+	{
 
-		sql::ResultSet* res = App::db->query("INSERT INTO " + this->table_name + " (name, email, address, password)"
-			" VALUES('" +
-			this->name + "', '" + this->email + "', '" + this->address + "', '" + this->password + "');");
+		sql::ResultSet *res = App::db->query("INSERT INTO " + this->table_name + " (name, email, address, password)"
+																				 " VALUES('" +
+											 this->name + "', '" + this->email + "', '" + this->address + "', '" + this->password + "');");
 		delete res;
 		return true;
 	}
-	catch(...) {
-
+	catch (...)
+	{
 	}
 	return false;
 }
 
-void User::migrate() {
+void User::migrate()
+{
 	std::string create_user = "CREATE TABLE Users("
-		"id INT(10) AUTO_INCREMENT PRIMARY KEY,"
-		"name VARCHAR(50) NOT NULL,"
-		"email VARCHAR(50) NOT NULL,"
-		"address VARCHAR(50) NOT NULL,"
-		"password VARCHAR(50) NOT NULL)";
+							  "id INT(10) AUTO_INCREMENT PRIMARY KEY,"
+							  "name VARCHAR(50) NOT NULL,"
+							  "email VARCHAR(50) NOT NULL,"
+							  "address VARCHAR(50) NOT NULL,"
+							  "password VARCHAR(50) NOT NULL)";
 	try
 	{
-		sql::ResultSet* res = App::db->query(create_user);
+		sql::ResultSet *res = App::db->query(create_user);
 		delete res;
 	}
 	catch (...)
 	{
 	}
+}
+
+User *AuthView::signIn()
+{
+	std::string email;
+	std::string password;
+	std::cout << "Sign In: ==============================" << std::endl;
+	std::cout << "Enter the following fields: " << std::endl;
+	std::cout << "Email: ";
+	std::cin >> email;
+	std::cout << "Password: ";
+	std::cin >> password;
+	User *user = new User("", email, "", password);
 }

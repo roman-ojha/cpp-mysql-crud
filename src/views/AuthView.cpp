@@ -1,14 +1,15 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
 
 #ifndef USER
 #include "../src/models/User.cpp"
 #define USER
 #endif
 
-class AuthView {
+class AuthView
+{
 public:
-	User* signUp()
+	User *signUp()
 	{
 		std::string password;
 		std::string name;
@@ -24,7 +25,7 @@ public:
 		std::cin >> address;
 		std::cout << "Password: ";
 		std::cin >> password;
-		User* user = new User(name, email, address, password);
+		User *user = new User(name, email, address, password);
 		if (user->save())
 		{
 			std::cout << "User register successfully" << std::endl;
@@ -37,7 +38,7 @@ public:
 
 		return nullptr;
 	}
-	void signIn() {
-		std::cout << "Signin " << std::endl;
-	}
+
+	// Define inside App.cpp
+	User *signIn();
 };

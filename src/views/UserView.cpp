@@ -1,11 +1,12 @@
-#include<iostream>
+#include <iostream>
 
-class UserView {
+class UserView
+{
 public:
-	void usersInfo() {
-
+	void usersInfo()
+	{
 	}
-	void createNewUser() {
-
+	void createNewUser()
+	{
 	}
 };
