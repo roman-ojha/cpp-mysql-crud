@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "Profile.cpp"
 #include "UserView.cpp"
 #include "AuthView.cpp"
@@ -20,10 +21,11 @@ public:
 	{
 		if (authUser->isAuthenticated)
 		{
-			std::cout << "==================== Hello, " + std::string(authUser->user->name) + " Welcome ====================" << std::endl;
 			int choice = 0;
 			while (true)
 			{
+				//std::system("cls");
+				std::cout << "==================== Hello, " + std::string(authUser->user->name) + " Welcome ====================" << std::endl;
 				std::cout << "Create new user (1): " << std::endl;
 				std::cout << "View Profile (2): " << std::endl;
 				std::cout << "List of Users & it's Operations (3): " << std::endl;

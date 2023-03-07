@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <windows.h>
 
 #include "models/User.cpp"
 #include "config/Database.cpp"
@@ -16,7 +17,10 @@ public:
 	static Database *db;
 	std::string name;
 	User authenticatedUser;
-	App(std::string name) : name(name) {}
+	App(std::string &_name){
+		this->name = _name;
+		SetConsoleTitleA(_name.c_str());
+	}
 	~App()
 	{
 		delete db;
@@ -111,6 +115,7 @@ User *AuthView::signIn()
 {
 	std::string email;
 	std::string password;
+	std::system("cls");
 	std::cout << "Sign In: ==============================" << std::endl;
 	std::cout << "Enter the following fields: " << std::endl;
 	std::cout << "Email: ";

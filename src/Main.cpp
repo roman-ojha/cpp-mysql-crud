@@ -16,7 +16,8 @@ constexpr auto DB_NAME = "cpp_crud";
 Database *App::db = new Database(DB_HOST, DB_USER, DB_PASWORD, DB_NAME);
 int main()
 {
-	App app("cpp_crud");
+	std::string appName = "cpp_curd";
+	App app(appName);
 	app.run();
 	return 0;
 }

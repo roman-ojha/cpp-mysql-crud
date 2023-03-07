@@ -15,6 +15,7 @@ public:
 		std::string name;
 		std::string email;
 		std::string address;
+		std::system("cls");
 		std::cout << "Sign UP: ==============================" << std::endl;
 		std::cout << "Enter the following fields: " << std::endl;
 		std::cout << "Name: ";
