@@ -3,8 +3,9 @@
 
 #include "models/User.cpp"
 #include "config/Database.cpp"
+#include "views/Home.cpp"
 
-class App
+class App: private Home
 {
 public:
 	static Database *db;
@@ -54,6 +55,7 @@ private:
 		}
 		return false;
 	}
+
 	void createNewUer()
 	{
 	}
@@ -65,77 +67,6 @@ private:
 	}
 	void updateProfile()
 	{
-	}
-	void home()
-	{
-		bool res = this->authenticateUser();
-		if (res)
-		{
-			std::cout << "==================== Hello, " + std::string(this->authenticatedUser.name) + " Welcome ====================" << std::endl;
-			int choice = 0;
-			while (true)
-			{
-				std::cout << "Create new user (1): " << std::endl;
-				std::cout << "View Profile (2): " << std::endl;
-				std::cout << "List of Users & it's Operations (3): " << std::endl;
-				std::cout << "Update your Profile (4)" << std::endl;
-				std::cout << "Close program (5)" << std::endl;
-				std::cout << "Choose between 1-5: ";
-				std::cin >> choice;
-				switch (choice)
-				{
-				case 1:
-					this->createNewUer();
-					break;
-				case 2:
-					this->viewProfile();
-					break;
-				case 3:
-					this->listOfUsers();
-					break;
-				case 4:
-					this->updateProfile();
-					break;
-				case 5:
-					exit(1);
-					break;
-				default:
-					std::cout << "Invalid Number, please pick it again:" << std::endl;
-					break;
-				}
-			}
-		}
-		else
-		{
-			this->signUp();
-		}
-	}
-
-	void signUp()
-	{
-		std::string password;
-		std::string name;
-		std::string email;
-		std::string address;
-		std::cout << "Sign UP: ==============================" << std::endl;
-		std::cout << "Enter the following fields: " << std::endl;
-		std::cout << "Name: ";
-		std::cin >> name;
-		std::cout << "Email: ";
-		std::cin >> email;
-		std::cout << "Address: ";
-		std::cin >> address;
-		std::cout << "Password: ";
-		std::cin >> password;
-		User user(name, email, address, password);
-		if (user.save())
-		{
-			std::cout << "User register successfully" << std::endl;
-			std::ofstream out("token.txt");
-			out << email;
-		}
-		else
-			std::cout << "Error while registering user" << std::endl;
 	}
 };
 
