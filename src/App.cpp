@@ -76,12 +76,14 @@ private:
 	}
 };
 
+// Defination of User model 
+std::string User::table_name = "user";
 bool User::save()
 {
 	try
 	{
 
-		sql::ResultSet *res = App::db->query("INSERT INTO " + this->table_name + " (name, email, address, password)"
+		sql::ResultSet *res = App::db->query("INSERT INTO " + User::table_name + " (name, email, address, password)"
 																				 " VALUES('" +
 											 this->name + "', '" + this->email + "', '" + this->address + "', '" + this->password + "');");
 		delete res;
@@ -109,6 +111,23 @@ void User::migrate()
 	catch (...)
 	{
 	}
+}
+
+sql::ResultSet* User::all() {
+	sql::ResultSet* res = App::db->query("SELECT * FROM " + User::table_name+";");
+	int id;
+	std::string name;
+	std::string email;
+	std::string address;
+	std::string password;
+	res->next();
+	id = res->getInt(1);
+	name = res->getInt("name");
+	email = res->getInt("email");
+	address = res->getInt("address");
+	password = res->getInt("password");
+	std::cout << id << "\t" << name << "\t" << email << "\t" << address << "\t" << password << std::endl;
+	return res;
 }
 
 User *AuthView::signIn()

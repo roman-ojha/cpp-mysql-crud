@@ -42,7 +42,7 @@ public:
 					this->viewProfile();
 					break;
 				case 3:
-					this->usersInfo();
+					this->usersInfo(authUser);
 					break;
 				case 4:
 					this->updateProfile();

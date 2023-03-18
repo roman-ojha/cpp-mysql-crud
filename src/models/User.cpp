@@ -1,4 +1,9 @@
 #include <iostream>
+#include <jdbc/mysql_connection.h>
+#include <jdbc/mysql_driver.h>
+#include <jdbc/cppconn/exception.h>
+#include <jdbc/cppconn/resultset.h>
+#include <jdbc/cppconn/statement.h>
 
 #ifndef USER
 #define USER
@@ -13,7 +18,7 @@ public:
 	std::string name;
 	std::string email;
 	std::string address;
-	std::string table_name = "users";
+	static std::string table_name;
 	User()
 	{
 		this->name = "";
@@ -37,6 +42,7 @@ public:
 		this->password = _pass;
 	}
 
+	static sql::ResultSet* all();
 	// Defines inside 'App.h'
 	void migrate();
 	bool save();

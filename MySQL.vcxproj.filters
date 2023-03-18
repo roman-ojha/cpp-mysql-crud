@@ -66,7 +66,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="C:\Users\razzr\Downloads\appIcon.ico">
+    <Image Include="src\assets\appIcon.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
